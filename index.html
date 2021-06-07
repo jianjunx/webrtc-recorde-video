@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>录像</title>
+</head>
+<body>
+  <div>
+    <button class="open-camera">打开摄像头</button>
+    <button class="start-recorde">开始录制</button>
+    <button class="end-recorde">结束录制</button>
+    <video id="live-video" src=""></video>
+  </div>
+</body>
+<script src="./js/adapter-latest.js"></script>
+<script src="./js/index.js"></script>
+<script>
+const camera = new Camera('#live-video')
+document.querySelector('.open-camera').addEventListener('click', () => camera.openCamera())
+document.querySelector('.start-recorde').addEventListener('click', () => camera.startRecorde())
+document.querySelector('.end-recorde').addEventListener('click', () => camera.endRecorde())
+</script>
+</html>

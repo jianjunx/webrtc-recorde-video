@@ -8,18 +8,26 @@
 </head>
 <body>
   <div>
-    <button class="open-camera">打开摄像头</button>
-    <button class="start-recorde">开始录制</button>
-    <button class="end-recorde">结束录制</button>
     <video id="live-video" src=""></video>
+    <div>
+      <button class="open-camera">打开摄像头</button>
+      <button class="start-recorde">开始录制</button>
+      <button class="end-recorde">结束录制</button>
+    </div>
+    <video id="preview-video" width="730" height="460" autoplay loop src=""></video>
   </div>
 </body>
 <script src="./js/adapter-latest.js"></script>
 <script src="./js/index.js"></script>
 <script>
-const camera = new Camera('#live-video')
+const camera = new VideoRecorde('#live-video')
 document.querySelector('.open-camera').addEventListener('click', () => camera.openCamera())
 document.querySelector('.start-recorde').addEventListener('click', () => camera.startRecorde())
-document.querySelector('.end-recorde').addEventListener('click', () => camera.endRecorde())
+const previewVideo = document.querySelector('#preview-video')
+document.querySelector('.end-recorde').addEventListener('click', async () => {
+  const res = await camera.endRecorde()
+  previewVideo.src = URL.createObjectURL(res.data)
+  camera.closeCamera()
+})
 </script>
 </html>
